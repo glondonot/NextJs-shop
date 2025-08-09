@@ -6,15 +6,24 @@ type CartItem = Product & { quantity: number };
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { products, budget } = body;
+    const body: unknown = await req.json();
+    
+    if (!body || typeof body !== 'object') {
+      return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+    }
+
+    const { products, budget } = body as { products: unknown; budget: unknown };
 
     if (!Array.isArray(products) || typeof budget !== "number" || budget < 0) {
       return NextResponse.json({ error: "Invalid request: products must be an array and budget must be a positive number" }, { status: 400 });
     }
 
-    const validProducts = products.filter((p: CartItem) => 
-      p && typeof p.id === "number" && typeof p.price === "number" && p.price > 0
+    const validProducts = products.filter((p: unknown): p is CartItem => 
+      p !== null && typeof p === "object" && 
+      "id" in p && "price" in p && 
+      typeof (p as CartItem).id === "number" && 
+      typeof (p as CartItem).price === "number" && 
+      (p as CartItem).price > 0
     );
 
     if (validProducts.length === 0) {
