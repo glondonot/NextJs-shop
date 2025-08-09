@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { findBestCombination } from "../../../utils/findBestCombination";
+import { type Product } from "../../../data/products";
+
+type CartItem = Product & { quantity: number };
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,7 +13,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid request: products must be an array and budget must be a positive number" }, { status: 400 });
     }
 
-    const validProducts = products.filter((p: any) => 
+    const validProducts = products.filter((p: CartItem) => 
       p && typeof p.id === "number" && typeof p.price === "number" && p.price > 0
     );
 
@@ -18,7 +21,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No valid products provided" }, { status: 400 });
     }
 
-    const currentTotal = validProducts.reduce((acc: number, p: any) => {
+    const currentTotal = validProducts.reduce((acc: number, p: CartItem) => {
       const qty = Math.max(1, Math.floor(Number(p.quantity) || 1));
       return acc + (Number(p.price) || 0) * qty;
     }, 0);

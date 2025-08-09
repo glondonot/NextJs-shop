@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Product } from "../data/products";
 import { useNotification } from "./NotificationProvider";
 import { CartItem } from "../utils/findBestCombination";
@@ -108,7 +109,7 @@ export default function BudgetClient({ products }: Props) {
                   <div key={r.id} className="recommended-item">
                     {r.image && (
                       <div className="recommended-item-image">
-                        <img src={r.image} alt={r.name} />
+                        <Image src={r.image} alt={r.name} width={60} height={60} />
                       </div>
                     )}
                     <div className="item-info">

@@ -17,13 +17,12 @@ export default function CartClient() {
   const loadCart = async () => {
     try {
       const res = await fetch("/api/cart", {
-        credentials: 'include', // Incluir cookies en la request
+        credentials: 'include',
       });
       const data = await res.json();
       setCart(data.cart || []);
     } catch (error) {
       console.error("Error loading cart:", error);
-      // Fallback: intentar leer desde las cookies del navegador
       try {
         const cookieValue = getCookie("shopping_cart_v1");
         if (cookieValue) {
@@ -42,7 +41,6 @@ export default function CartClient() {
 
   useEffect(() => {
     loadCart();
-    // Debug: mostrar cookies disponibles
     console.log("CartClient - Document cookies:", document.cookie);
   }, []);
 
