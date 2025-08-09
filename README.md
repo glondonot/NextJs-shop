@@ -2,7 +2,7 @@
 
 Una aplicación de tipo tienda desarrollada con Next.js que incluye gestión de productos, carrito de compras y optimización por presupuesto.
 
-URL de la aplicación en Vercel: [NextJs TechStore](https://next-js-shop-ki2zs6duf-gabriels-projects-a6af1bab.vercel.app)
+URL de la aplicación en Vercel: [NextJs TechStore](https://next-js-shop-cixdk3hdk-gabriels-projects-a6af1bab.vercel.app/)
 
 ## Instrucciones para Instalar y Ejecutar
 
