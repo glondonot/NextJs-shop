@@ -72,7 +72,7 @@ npm start
 
 ```
 NextJs-shop/
-├── app/                    # App Router de Next.js
+├── app/                   # App Router de Next.js
 │   ├── api/               # API Routes
 │   │   ├── cart/          # Endpoints del carrito
 │   │   ├── optimize/      # Endpoint de optimización
