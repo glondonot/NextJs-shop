@@ -1,17 +1,19 @@
 import { NextRequest } from "next/server";
-import { PRODUCTS } from "../../../data/products"; // Para validar productos en el carrito
+import { PRODUCTS, type Product } from "../../../data/products";
 import { CART_COOKIE_NAME, parseCookies, createCookieResponse } from "../../../utils/cookies";
+
+type CartItem = Product & { quantity: number };
 
 export async function GET(req: NextRequest) {
   const cookies = parseCookies(req);
-  let cart = [];
+  let cart: CartItem[] = [];
   
   try {
     if (cookies[CART_COOKIE_NAME]) {
       const parsed = JSON.parse(cookies[CART_COOKIE_NAME]);
       cart = Array.isArray(parsed) ? parsed : [];
     }
-  } catch (error) {
+  } catch {
     cart = [];
   }
   return createCookieResponse({ cart }, cart, CART_COOKIE_NAME);
@@ -21,7 +23,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const cookies = parseCookies(req);
-    let cart: any[] = [];
+    let cart: CartItem[] = [];
     try {
       if (cookies[CART_COOKIE_NAME]) {
         const parsed = JSON.parse(cookies[CART_COOKIE_NAME]);
@@ -38,7 +40,7 @@ export async function POST(req: NextRequest) {
   }
 
   if (action === "replace" && Array.isArray(body.items)) {
-    const filteredItems = body.items.filter((i: any) => i.quantity > 0);
+    const filteredItems = body.items.filter((i: CartItem) => i.quantity > 0);
     return createCookieResponse({ cart: filteredItems }, filteredItems, CART_COOKIE_NAME);
   }
 

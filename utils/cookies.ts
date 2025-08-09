@@ -17,7 +17,7 @@ export function createCookieResponse(
   data: any,
   cartData: any,
   name: string,
-  maxAgeSeconds = 60 * 60 * 24 * 7 // 7 días
+  maxAgeSeconds = 60 * 60 * 24 * 7
 ) {
   return new NextResponse(JSON.stringify(data), {
     headers: {

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { CartItem } from "../utils/findBestCombination";
 
 type Props = {
@@ -13,7 +14,7 @@ export default function CartItemRow({ item, onUpdate, onRemove }: Props) {
     <div className="cart-item">
       {item.image && (
         <div className="cart-item-image">
-          <img src={item.image} alt={item.name} />
+          <Image src={item.image} alt={item.name} width={80} height={80} />
         </div>
       )}
       

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Product } from "../data/products";
 
 type Props = {
@@ -15,9 +16,11 @@ export default function ProductCard({ product, onAdd }: Props) {
     <div className="card">
       {product.image && (
         <div className="product-image">
-          <img 
+          <Image 
             src={product.image} 
             alt={product.name} 
+            width={200}
+            height={200}
             className="product-img"
           />
         </div>

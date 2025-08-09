@@ -25,9 +25,10 @@ const nextConfig: NextConfig = {
     ];
   },
   
-  experimental: {
-    optimizeCss: true,
-  }
+  // Comentado para evitar el error de critters en producción
+  // experimental: {
+  //   optimizeCss: true,
+  // }
 };
 
 export default nextConfig;

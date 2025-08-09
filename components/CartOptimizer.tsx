@@ -114,7 +114,7 @@ export default function CartOptimizer({ currentCart, onAccept }: Props) {
                       <div key={r.id} className="optimized-item">
                         {r.image && (
                           <div className="optimized-item-image">
-                            <img src={r.image} alt={r.name} />
+                            <Image src={r.image} alt={r.name} width={60} height={60} />
                           </div>
                         )}
                         <div className="optimized-item-info">
